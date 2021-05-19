@@ -1,14 +1,31 @@
 <?php
 
-namespace App;
+namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Post;
+use App\Http\Requests\PostRequest;
 
-class Post extends Model
+class PostController extends Controller
 {
-    public function getPaginateByLimit(int $limit_count = 10)
+    public function index(Post $post)
     {
-    // updated_atで降順に並べたあと、limitで件数制限をかける
-        return $this->orderBy('updated_at', 'DESC')->paginate($limit_count);
+        return view('index')->with(['posts' => $post->getPaginate()]);
+    }
+
+    public function show(Post $post)
+    {
+        return view('show')->with(['post' => $post]);
+    }
+
+    public function create()
+    {
+        return view('create');
+    }
+
+    public function store(Post $post, PostRequest $request) // 引数をRequest->PostRequestにする
+    {
+        $input = $request['post'];
+        $post->fill($input)->save();
+        return redirect('/posts/' . $post->id);
     }
 }
