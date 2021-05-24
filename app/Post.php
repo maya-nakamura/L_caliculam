@@ -14,6 +14,6 @@ class Post extends Model
     
     public function getPaginate()
     {
-        return $this->orderBy('updated_at', 'DESC')->paginate(5);
+        return $this->orderBy('updated_at', 'DESC')->paginate(10);
     }
 }
