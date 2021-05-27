@@ -5,9 +5,11 @@
         <title>Blog</title>
         <!-- Fonts -->
     </head>
+    
     <body>
         <h1>Blog Name</h1>
         <p class='create'>[<a href='/posts/create'>create</a>]</p>
+        
         <div class='posts'>
             @foreach ($posts as $post)
                 <div class='post'>
@@ -16,8 +18,17 @@
                 </div>
             @endforeach
         </div>
+        
         <div class='paginate'>
             {{ $posts->links() }}
         </div>
+        
+        //<form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post" style="display:inline">
+          //  @csrf
+            //@method('DELETE')
+            //<button type="submit">delete</button> 
+        //</form>
+        
     </body>
+    
 </html>
